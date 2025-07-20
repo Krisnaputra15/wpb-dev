@@ -179,7 +179,7 @@
                         labelCellId = `${minRow}_${minCol}`;
                     }
 
-                    const boothLabel = booth.type + (booth.need_label ? booth.label : '');
+                    const boothLabel = booth.type + (booth.need_label == '1' ? booth.label : '');
 
                     // Apply background and edge borders
                     positionIds.forEach(posId => {
@@ -205,8 +205,9 @@
                         if (isLeft) $cell.addClass('border-black').addClass('border-start');
                         if (isRight) $cell.addClass('border-black').addClass('border-end');
 
-                        if(parseInt(booth.is_booked)){
+                        if(booth.is_booked == '1'){
                             $cell.addClass('bg-secondary')
+                                 .addClass('unclickable')
                                  .removeClass('border-white mergeable')
                                  .addClass('border-black');
                         } else {
@@ -214,7 +215,7 @@
                                  .attr('data-booth', booth.id)
                                  .attr('data-pov', booth.booth_pov_file == null || booth.booth_pov_file == '' ? '' : 'storage/'+booth.booth_pov_file)
 
-                            if(booth.is_buyable){
+                            if(booth.is_buyable == '1' && booth.is_booked != '1'){
                                 $cell.removeClass('unclickable')
                                     .attr('data-bs-toggle', 'tooltip')
                                     .attr('data-bs-placement', 'left')
