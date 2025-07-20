@@ -128,6 +128,9 @@ class BoothTransactionController extends Controller
                    ->select('a.*')
                    ->where('bt.id', $id)
                    ->first();
+        if(!$boothTransaction){
+            abort(404);
+        }
         return view('admin.transaction.editBooth', compact('id', 'boothTransaction'));
     }
 

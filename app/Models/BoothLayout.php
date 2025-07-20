@@ -72,12 +72,10 @@ class BoothLayout extends Model
             ->leftJoin('companies as c', 'c.id', 'u.company_id')
             ->select($columns)
             ->where('bl.layout_id', $layoutId)
-            ->orderBy('label', 'asc')
-            ->get();
+            ->orderBy('label', 'asc');
         } else {
             return self::select($columns)->join('booths', 'booths.id', 'booth_layouts.booth_id')
-            ->where('booth_layouts.layout_id', $layoutId)
-            ->get();
+            ->where('booth_layouts.layout_id', $layoutId);
         }
     }
 }

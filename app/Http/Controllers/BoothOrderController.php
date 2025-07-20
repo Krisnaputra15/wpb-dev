@@ -44,7 +44,7 @@ class BoothOrderController extends Controller
     }
 
     public function boothSelection($agendaId){
-        $agenda = Agenda::with('layout')->find($agendaId);
+        $agenda = Agenda::with('layout')->findOrFail($agendaId);
         return view('admin.boothOrder.booth-selection', compact('agenda'));
     }
 

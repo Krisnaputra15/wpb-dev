@@ -83,7 +83,7 @@ class BoothLayoutController extends Controller
             $columns = ['booth_layouts.id', 'positions', 'type', 'color', 'label', 'need_label'];
         }
 
-        $boothLayouts = BoothLayout::getBoothLayout($columns, $layoutId, $request->query('isTransaction'));
+        $boothLayouts = BoothLayout::getBoothLayout($columns, $layoutId, $request->query('isTransaction'))->get();
 
         $layout = Layout::find($layoutId);
         $boothColors = Booth::select('id','name','type','color')->get();
