@@ -136,7 +136,7 @@ Pemesanan Booth
                     let unavailableAgenda = '';
                     response.data.forEach(function(data){
                         console.log(data);
-                        const cover = `{{asset('${data.cover}')}}`;
+                        const cover = `{{asset('storage/${data.cover}')}}`;
                         const url = '{{route("boothOrder.boothSelection", ":id")}}'.replace(':id', data.id);
                         const startDate = moment(data.start_date);
                         const endDate = moment(data.end_date);
