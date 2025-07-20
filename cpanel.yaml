@@ -1,0 +1,4 @@
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/dpqylzet/public_html/wpb-dev
+    - cd $DEPLOYPATH
