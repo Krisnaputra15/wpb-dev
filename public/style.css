@@ -1,0 +1,415 @@
+* {
+    box-sizing: border-box;
+}
+
+.dataTables_processing {
+    background: white;
+    color: black;
+    font-size: 1.2em;
+    padding: 10px;
+}
+
+.booth-selection {
+    height: 30px;
+    position: relative;
+}
+.booth-selection:hover {
+    cursor: pointer;
+}
+
+.booth-selection .label {
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    right: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: white;
+}
+
+.color-legenda {
+    height: 15px;
+    width: 15px;
+}
+
+.w-45 {
+    width: 45%;
+}
+
+.receiver:hover {
+    background-color: rgb(231, 231, 231);
+    transition: 0.3s;
+    cursor: pointer;
+    border-radius: 7px;
+}
+
+#choosen-receiver {
+    min-height: 3rem;
+}
+
+.fixed-height-btn {
+    max-height: 1.5rem;
+}
+
+.booth-container {
+    position: relative;
+    display: inline-block;
+    height: auto;
+}
+
+.responsive-img {
+    width: 100%; /* The image will take up the full width of its parent container */
+    height: 1400px; /* Maintains the aspect ratio */
+    max-width: 1400px; /* Optional: Ensures the image doesn’t get larger than the original size */
+}
+
+.booth-padding{
+    height: 25px !important;
+    width: 27px !important;
+}
+
+.centered-element {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+/* .booth-grid {
+    display: grid;
+    grid-template-columns: repeat(33, 1fr);
+    width: fit-content;
+    margin: auto;
+}
+
+.booth-cell {
+    width: 27px !important;
+    height: 27px !important;
+    position: relative;
+}
+
+.booth-cell .label {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7rem;
+}
+
+.label-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+} */
+
+.orientation-south {
+    transform: rotate(0deg);
+}
+
+.orientation-north {
+    transform: rotate(180deg);
+}
+
+.orientation-west {
+    margin-top: 10px; /* Add spacing for these orientations */
+    transform: rotate(90deg);
+    position: relative;
+}
+
+.orientation-east {
+    margin-top: 10px; /* Add spacing for these orientations */
+    transform: rotate(-90deg);
+    position: relative;
+}
+.row-container {
+    display: flex;
+    align-items: start; /* Ensure row height remains consistent */
+}
+
+/* #booth_id option[data-color] {
+    padding-left: 24px;
+    position: relative;
+}
+
+#booth_id option[data-color]::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-color: var(--color, #000);
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+} */
+
+:root {
+    --d: 700ms;
+    --e: cubic-bezier(0.19, 1, 0.22, 1);
+    --font-sans: "Rubik", sans-serif;
+    --font-serif: "Cardo", serif;
+}
+
+.agenda-container {
+    display: flex;
+    flex-wrap: nowrap; /* Prevents wrapping */
+    overflow-x: auto; /* Enables horizontal scrolling */
+    scroll-behavior: smooth; /* Optional, for smooth scrolling */
+    max-width: 78vw; /* Prevents container from growing past the viewport */
+    scrollbar-width: none;
+}
+
+.agenda-card {
+    position: relative;
+    display: flex;
+    flex: 0 0 auto;
+    align-items: flex-end;
+    overflow: hidden;
+    padding: 1rem;
+    width: 250px;
+    text-align: center;
+    color: whitesmoke;
+    background-color: whitesmoke;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1),
+        0 4px 4px rgba(0, 0, 0, 0.1), 0 8px 8px rgba(0, 0, 0, 0.1),
+        0 16px 16px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 600px) {
+    .agenda-card {
+        height: 350px;
+    }
+}
+
+.agenda-card:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 110%;
+    background-size: cover;
+    background-position: 0 0;
+    transition: transform calc(var(--d) * 1.5) var(--e);
+    pointer-events: none;
+    background-image: var(--bg-image);
+}
+
+.unavailable {
+    background-color: rgba(0, 0, 0, 0.04);
+    color: white;
+    transition: background-color calc(var(--d) * 1.5) var(--e);
+}
+
+.cover{
+    width: 100%;
+    height: 110%;
+    max-height: 195px;
+    background-size: cover;
+}
+
+.unclickable:hover {
+    cursor: default;
+}
+
+.agenda-card:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200%;
+    pointer-events: none;
+    background-image: linear-gradient(
+        to bottom,
+        hsla(0, 0%, 0%, 0) 0%,
+        hsla(0, 0%, 0%, 0.009) 11.7%,
+        hsla(0, 0%, 0%, 0.034) 22.1%,
+        hsla(0, 0%, 0%, 0.072) 31.2%,
+        hsla(0, 0%, 0%, 0.123) 39.4%,
+        hsla(0, 0%, 0%, 0.182) 46.6%,
+        hsla(0, 0%, 0%, 0.249) 53.1%,
+        hsla(0, 0%, 0%, 0.32) 58.9%,
+        hsla(0, 0%, 0%, 0.394) 64.3%,
+        hsla(0, 0%, 0%, 0.468) 69.3%,
+        hsla(0, 0%, 0%, 0.54) 74.1%,
+        hsla(0, 0%, 0%, 0.607) 78.8%,
+        hsla(0, 0%, 0%, 0.668) 83.6%,
+        hsla(0, 0%, 0%, 0.721) 88.7%,
+        hsla(0, 0%, 0%, 0.762) 94.1%,
+        hsla(0, 0%, 0%, 0.79) 100%
+    );
+    transform: translateY(-50%);
+    transition: transform calc(var(--d) * 2) var(--e);
+}
+
+.agenda-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
+    transition: transform var(--d) var(--e);
+    z-index: 1;
+}
+
+.agenda-content > * + * {
+    margin-top: 1rem;
+}
+
+.agenda-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.agenda-copy {
+    font-size: 1.125rem;
+    line-height: 1.35;
+}
+
+.agenda-btn {
+    cursor: pointer;
+    margin-top: 1.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.65rem;
+    font-weight: bold;
+    letter-spacing: 0.025rem;
+    text-transform: uppercase;
+    color: white;
+    background-color: black;
+    border: none;
+}
+
+.agenda-btn:hover {
+    background-color: #333333;
+}
+
+.agenda-btn:focus {
+    outline: 1px dashed yellow;
+    outline-offset: 3px;
+}
+
+@media (hover: hover) and (min-width: 600px) {
+    .agenda-card:after {
+        transform: translateY(0);
+    }
+
+    .agenda-content {
+        transform: translateY(calc(100% - 4.5rem));
+    }
+
+    .agenda-content > *:not(.title) {
+        opacity: 0;
+        transform: translateY(1rem);
+        transition: transform var(--d) var(--e), opacity var(--d) var(--e);
+    }
+
+    .agenda-card:hover,
+    .agenda-card:focus-within {
+        align-items: center;
+    }
+
+    .agenda-card:hover:before,
+    .agenda-card:focus-within:before {
+        transform: translateY(-4%);
+    }
+
+    .agenda-card:hover:after,
+    .agenda-card:focus-within:after {
+        transform: translateY(-50%);
+    }
+
+    .agenda-card:hover .agenda-content,
+    .agenda-card:focus-within .agenda-content {
+        transform: translateY(0);
+    }
+
+    .agenda-card:hover .agenda-content > *:not(.title),
+    .agenda-card:focus-within .agenda-content > *:not(.title) {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: calc(var(--d) / 8);
+    }
+
+    .agenda-card:focus-within:before,
+    .agenda-card:focus-within:after,
+    .agenda-card:focus-within .agenda-content,
+    .agenda-card:focus-within .agenda-content > *:not(.title) {
+        transition-duration: 0s;
+    }
+}
+
+.tooltip-inner {
+    max-width: 500px !important; /* Adjust width */
+    white-space: normal; /* Allow text wrapping */
+}
+
+.aframe-container {
+    width: 100%;
+    height: 550px; /* Adjust height as needed */
+    overflow: hidden;
+    position: relative;
+}
+
+a-scene {
+    width: 100%;
+    height: 100%;
+}
+
+/* Base tooltip style */
+.tooltip {
+    font-size: 0.875rem;
+    padding: 8px 12px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    opacity: 1 !important;
+  }
+
+  /* Tooltip inner container */
+  .tooltip .tooltip-inner {
+    background-color: #333;
+    color: #fff;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 6px;
+    max-width: 220px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Optional: make it readable in dark/light themes */
+  @media (prefers-color-scheme: dark) {
+    .tooltip .tooltip-inner {
+      background-color: #222;
+      color: #fff;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    .tooltip .tooltip-inner {
+      background-color: #333;
+      color: #fff;
+    }
+  }
