@@ -143,7 +143,7 @@ class BoothController extends Controller
         }
 
         $payload = $request->except(['_method','_token']);
-        $payload['fixed_price'] = str_replace('.','',$payload['fixed_price']);
+        $fixedPrice = str_replace('.','',$payload['default_price']);
 
         $booth = Booth::where('id', $id)->update($payload);
         $updatePrice = DB::table('registered_booths')->join('booth_layouts', 'registered_booths.booth_layout_id', '=', 'booth_layouts.id')
@@ -151,7 +151,7 @@ class BoothController extends Controller
                                                             ->where('booths.id', $id)
                                                             ->where('is_booked', 0)
                                                             ->update([
-                                                                'fixed_price' => $request->default_price
+                                                                'fixed_price' => $fixedPrice
                                                             ]);
 
         toastr()->success('Jenis booth berhasil diubah');
