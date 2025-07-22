@@ -287,7 +287,7 @@
                                                                             name="tax_payment_proof_file"
                                                                             id="tax_payment_proof_file"
                                                                             class="form-control"
-                                                                            accept=".jpg,.jpeg,.png,.svg" required>
+                                                                            accept=".jpg,.jpeg,.png,.pdf" required>
                                                                     </div>
                                                                     <div class="mb-3 text-center">
                                                                         <button class="btn btn-primary"
