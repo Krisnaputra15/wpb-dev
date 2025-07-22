@@ -225,8 +225,8 @@ class AgendaController extends Controller
                 // unlink(public_path($agenda->cover));
             }
             RegisteredBooth::where('agenda_id', $id)->delete();
-            AgendaParticipant::where('agenda_id', $id)->delete();
             BoothTransaction::whereIn('id', RegisteredBooth::where('agenda_id', $id)->select(['booth_transaction_id'])->get()->pluck('booth_transaction_id'))->delete();
+            AgendaParticipant::where('agenda_id', $id)->delete();
             $agenda->delete();
             return response()->json(['message' => 'Agenda berhasil dihapus'], 200);
         } else {
