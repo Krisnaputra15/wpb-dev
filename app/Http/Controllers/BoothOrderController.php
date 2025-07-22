@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class BoothOrderController extends Controller
 {
@@ -24,7 +25,7 @@ class BoothOrderController extends Controller
     }
 
     public function fetchAgenda(Request $request){
-        $agenda = Agenda::where('is_active', 1)->whereNotNull('layout_id');
+        $agenda = Agenda::where('is_active', 1)->whereDate('start_date','>=',date('Y-m-d'))->whereNotNull('layout_id');
         foreach($request->all() as $key => $value){
             $explode = explode('_', $key);
             if(count($explode) == 1){
@@ -50,12 +51,15 @@ class BoothOrderController extends Controller
 
     public function boothSelectionStore(Request $request, $agendaId){
         $validator = Validator::make($request->all(), [
-            'registered_booth_id.*' => 'required|exists:registered_booths,id'
+            'registered_booth_id.*' => [
+                'required',
+                Rule::exists('registered_booths', 'id')->where('is_booked', 0)
+            ]
         ]);
 
         if($validator->fails()){
             toastr()->error('Pilihan booth tidak valid / sudah terisi, silakan pilih ulang booth');
-            return redirect()->route('boothOrder.booth-selection', ['agendaId' => $agendaId]);
+            return redirect()->route('boothOrder.boothSelection', ['agendaId' => $agendaId])->with('error','Pilihan booth tidak valid / sudah terisi, silakan pilih ulang booth')->setStatusCode(422);
         }
 
         $boothData = RegisteredBooth::from('registered_booths as rb')

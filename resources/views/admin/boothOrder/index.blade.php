@@ -135,34 +135,27 @@ Pemesanan Booth
                     let availableAgenda = '';
                     let unavailableAgenda = '';
                     response.data.forEach(function(data){
-                        console.log(data);
                         const cover = `{{asset('storage/${data.cover}')}}`;
                         const url = '{{route("boothOrder.boothSelection", ":id")}}'.replace(':id', data.id);
                         const startDate = moment(data.start_date);
                         const endDate = moment(data.end_date);
-                        console.log('today', today, 'start_date', startDate, 'end_date', endDate);
 
-                        const isUnavailable = startDate <= today || (startDate > today && endDate <= today);
-                        console.log('is unavailable', isUnavailable);
+                        // const isUnavailable = data.is_active == 1 && (startDate >= today || endDate <= today);
                         let agendaCard = `
-                            <div class="agenda-card col-2 me-3" style="--bg-image: ${isUnavailable ? 'linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),' : ''}url(${cover});">
+                            <div class="agenda-card col-2 me-3" style="--bg-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url(${cover});">
                                 <div class="agenda-content">
                                     <h2 class="agenda-title text-light">${data.name}</h2>
                                     <p class="agenda-copy">${startDate.locale('id').format('LL')} ${endDate == startDate ? '' : ' - '+endDate.locale('id').format('LL')}</p>
-                                    ${!isUnavailable ? `<a href="${url}" class="agenda-btn">Pilih Agenda</a>` : ''}
+                                    <a href="${url}" class="agenda-btn">Pilih Agenda</a>
                                 </div>
                             </div>
                         `;
 
                         // Append to the respective agenda list
-                        if (isUnavailable) {
-                            unavailableAgenda += agendaCard;
-                        } else {
-                            availableAgenda += agendaCard;
-                        }
+                        availableAgenda += agendaCard;
                     });
                     $('#available-agenda_container').html(availableAgenda);
-                    $('#unavailable-agenda_container').html(unavailableAgenda);
+                    // $('#unavailable-agenda_container').html(unavailableAgenda);
                     $('.booth-loading').addClass('d-none');
                     $('.agenda-container').show();
                 },
