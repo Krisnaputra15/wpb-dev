@@ -143,6 +143,7 @@ class BoothController extends Controller
         }
 
         $payload = $request->except(['_method','_token']);
+        $payload['fixed_price'] = str_replace('.','',$payload['fixed_price']);
 
         $booth = Booth::where('id', $id)->update($payload);
         $updatePrice = DB::table('registered_booths')->join('booth_layouts', 'registered_booths.booth_layout_id', '=', 'booth_layouts.id')
